@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wendel Vinicius - Portfólio Premium</title>
+    
+    <!-- Meta Description para SEO -->
+    <meta name="description" content="Portfólio de Wendel Vinicius, analista de teste/QA e desenvolvedor front-end. Veja meus projetos, habilidades e entre em contato.">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Exo+2:wght@900&display=swap" rel="stylesheet">
+    
+    <!-- Alpine.js (para o menu mobile) -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- AOS - Animate On Scroll -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👨‍💻</text></svg>">
+
+    <style>
+        /* ===== ESTILOS GERAIS E FONTES ===== */
+        body { 
+            font-family: 'Inter', sans-serif;
+            background-color: #0c111d; /* Tom de azul-escuro mais profundo */
+            color: #e5e7eb; /* cinza claro para melhor leitura */
+            cursor: none; /* Esconde o cursor padrão */
+        }
+        .font-display { font-family: 'Exo 2', sans-serif; }
+        .bg-custom-dark { background-color: #0c111d; }
+        .bg-custom-dark-2 { background-color: #1f2937; }
+        .text-custom-accent { color: #38bdf8; }
+        .border-custom-accent { border-color: #38bdf8; }
+        .ring-custom-accent { --tw-ring-color: #38bdf8; }
+
+        /* ===== ESTILO DO RASTRO DO CURSOR ===== */
+        .trail {
+            position: fixed;
+            height: 10px;
+            width: 10px;
+            border-radius: 50%;
+            background: #38bdf8;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s, transform 0.2s;
+            z-index: 9999;
+            box-shadow: 0 0 15px 2px #38bdf8;
+        }
+
+        /* ===== ESTILO DA BARRA DE ROLAGEM ===== */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background-color: #1f2937;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #38bdf8;
+            border-radius: 10px;
+            border: 2px solid #1f2937;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #7dd3fc;
+        }
+        
+        /* ===== MICRO-INTERAÇÕES ===== */
+        .icon-lift {
+            transition: transform 0.3s ease;
+        }
+        .icon-lift:hover {
+            transform: translateY(-4px);
+        }
+
+        /* ===== FUNDO ANIMADO (PARTÍCULAS) ===== */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            background-image: linear-gradient(180deg, rgba(12,17,29,0.8) 0%, #0c111d 100%);
+        }
+        
+        /* ===== ESTILO DOS CARDS DE PROJETO ===== */
+        .card-glow {
+            border: 1px solid rgb(55 65 81 / 0.4);
+            transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card-glow:hover {
+            border-color: rgb(56 189 248 / 0.5);
+            box-shadow: 0 0 20px rgb(56 189 248 / 0.25);
+        }
+    </style>
+</head>
+<body class="bg-custom-dark">
+
+    <!-- Elementos para o rastro do cursor -->
+    <div class="trail"></div>
+
+    <!-- ===== Cabeçalho / Navbar ===== -->
+    <header x-data="{ mobileMenuOpen: false }" class="bg-custom-dark/80 backdrop-blur-sm sticky top-0 z-40">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="text-xl font-bold text-white font-display tracking-wider">Wendel Vinicius</a>
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="#sobre" class="hover:text-custom-accent transition-colors duration-300">Sobre</a>
+                <a href="#projetos" class="hover:text-custom-accent transition-colors duration-300">Projetos</a>
+                <a href="#contato" class="bg-sky-600 hover:bg-sky-500 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300">Contato</a>
+            </div>
+            <div class="md:hidden">
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-white focus:outline-none">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path :class="{'hidden': mobileMenuOpen, 'block': !mobileMenuOpen }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        <path :class="{'block': mobileMenuOpen, 'hidden': !mobileMenuOpen }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        </nav>
+        <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" class="md:hidden bg-custom-dark-2">
+            <a href="#sobre" class="block py-2 px-4 text-sm hover:bg-gray-700" @click="mobileMenuOpen = false">Sobre</a>
+            <a href="#projetos" class="block py-2 px-4 text-sm hover:bg-gray-700" @click="mobileMenuOpen = false">Projetos</a>
+            <a href="#contato" class="block py-2 px-4 text-sm hover:bg-gray-700" @click="mobileMenuOpen = false">Contato</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6">
+
+        <!-- ===== Seção Home / Herói ===== -->
+        <section id="home" class="min-h-screen flex items-center justify-center text-center relative overflow-hidden">
+            <!-- Fundo de Partículas -->
+            <div id="particles-js"></div>
+            
+            <div class="max-w-4xl z-10">
+                <h1 class="text-6xl md:text-8xl font-black text-white leading-tight mb-4 font-display" data-aos="fade-up">
+                    Olá, eu sou <span class="text-custom-accent">Wendel Vinicius</span>.
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 mb-8" data-aos="fade-up" data-aos-delay="200">
+                    Eu sou um analista de teste/QA e desenvolvedor front-end apaixonado por criar experiências digitais incríveis.
+                </p>
+                <div class="flex justify-center gap-4" data-aos="fade-up" data-aos-delay="400">
+                    <a href="#projetos" class="bg-sky-600 hover:bg-sky-500 text-white font-bold py-3 px-8 rounded-lg transition-transform duration-300 hover:scale-105">
+                        Meus Projetos
+                    </a>
+                    <a href="#contato" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-8 rounded-lg transition-transform duration-300 hover:scale-105">
+                        Entre em Contato
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Seção Sobre Mim ===== -->
+        <section id="sobre" class="py-20 md:py-32">
+            <div class="max-w-4xl mx-auto text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 font-display">Sobre Mim</h2>
+                <p class="text-gray-400">Minha jornada e as tecnologias com as quais trabalho.</p>
+            </div>
+            <div class="max-w-3xl mx-auto text-left" data-aos="fade-up">
+                <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+                    Eu sou Wendel Vinicius, tenho 22 anos. Profissional proativo e apaixonado por Garantia de Qualidade de Software, cursando o 8º período de Ciência da Computação e com foco em assegurar a excelência e robustez de produtos digitais. Com experiência como Estagiário de QA na WATI Consultoria, onde atuei na elaboração estratégica de casos de teste e na identificação proativa de bugs, contribuindo diretamente para a elevação da qualidade e estabilidade de sistemas digitais. Possuo habilidades em Python e em Front-end (HTML, CSS, JavaScript), o que me permite compreender e colaborar efetivamente com equipes de desenvolvimento. Minhas habilidades em organização, raciocínio lógico e aprendizado contínuo me permitem aplicar e aprimorar metodologias de teste para entregar soluções de alta qualidade. Busco uma oportunidade para aplicar minhas competências e contribuir para o sucesso de equipes de desenvolvimento.
+                </p>
+                <h3 class="text-2xl font-bold text-white mb-4 mt-12 font-display">Minhas Habilidades</h3>
+                <div class="flex flex-wrap gap-4 items-center">
+                    <!-- HTML5 -->
+                    <div class="inline-flex items-center gap-2 bg-gray-700 text-sm font-medium px-4 py-2 rounded-full icon-lift">
+                        <svg class="h-6 w-6" viewBox="0 0 128 128"><path fill="#E44D26" d="M19.037 113.876L9.032 1.661h109.936l-10.016 112.198-45.019 12.48z"></path><path fill="#F16529" d="M64 116.8l36.378-10.086 8.559-95.878H64z"></path><path fill="#EBEBEB" d="M64 52.455H45.788L44.53 38.361H64V24.599H29.489l.33 3.692 3.382 37.927H64zm0 35.743l-.061.017-15.327-4.14-.979-10.975H33.816l1.928 21.609 28.193 7.826.063-.017z"></path><path fill="#fff" d="M63.952 52.455v13.763h16.947l-1.597 17.849-15.35 4.143v14.319l28.215-7.82.207-2.325 3.234-36.233.335-3.696h-3.708zm0-27.856v13.762h33.244l.276-3.092.628-6.978.329-3.692z"></path></svg>
+                        <span class="text-gray-300">HTML5</span>
+                    </div>
+                    <!-- CSS3 -->
+                    <div class="inline-flex items-center gap-2 bg-gray-700 text-sm font-medium px-4 py-2 rounded-full icon-lift">
+                        <svg class="h-6 w-6" viewBox="0 0 128 128"><path fill="#1572B6" d="M18.814 114.123L8.76 1.352h110.48l-10.064 112.754-45.243 12.543-45.119-12.526z"></path><path fill="#33A9DC" d="M64.001 117.062l36.559-10.136 8.601-96.354h-45.16v106.49z"></path><path fill="#fff" d="M64.001 51.429h18.302l1.264-14.163H64.001V23.435h34.682l-.332 3.711-3.4 38.114h-30.95V51.429z"></path><path fill="#EBEBEB" d="M64.083 87.349l-.061.018-15.403-4.159-.985-11.031H33.752l1.937 21.717 28.331 7.863.063-.018v-14.39z"></path><path fill="#fff" d="M81.127 64.675l-1.666 18.522-15.426 4.164v14.39l28.354-7.858.208-2.337 2.406-26.881H81.127z"></path><path fill="#EBEBEB" d="M64.048 23.435v13.831H30.64l-.277-3.108-.63-7.012-.331-3.711h34.646zm-.047 27.996v13.831H48.792l-.277-3.108-.631-7.012-.33-3.711h16.447z"></path></svg>
+                        <span class="text-gray-300">CSS3</span>
+                    </div>
+                    <!-- JavaScript -->
+                    <div class="inline-flex items-center gap-2 bg-gray-700 text-sm font-medium px-4 py-2 rounded-full icon-lift">
+                       <svg class="h-6 w-6" viewBox="0 0 128 128"><path fill="#F0DB4F" d="M1.408 1.408h125.184v125.185H1.408z"></path><path fill="#323330" d="M116.347 96.736c-.917-5.711-4.641-10.508-15.672-14.981-3.832-1.761-8.104-3.022-9.377-5.926-.452-1.69-.512-2.642-.226-3.665.821-3.32 4.784-4.355 7.925-3.403 2.023.678 3.938 2.237 5.093 4.724 5.402-3.498 5.391-3.475 9.163-5.879-1.381-2.141-2.118-3.129-3.022-4.045-3.249-3.629-7.676-5.498-14.756-5.355l-3.688.477c-3.534.893-6.902 2.748-8.877 5.235-5.926 6.724-4.236 18.492 2.975 23.335 7.104 5.332 17.54 6.545 18.873 11.531 1.297 6.104-4.486 8.08-10.234 7.378-4.236-.881-6.592-3.034-9.139-6.949-4.688 2.713-4.688 2.713-9.508 5.485 1.143 2.499 2.344 3.63 4.26 5.795 9.068 9.198 31.76 8.746 35.83-5.176.165-.478 1.261-3.666.38-8.581zM69.462 58.943H57.753l-.048 30.272c0 6.438.333 12.34-.714 14.149-1.713 3.558-6.152 3.117-8.175 2.427-2.059-1.012-3.106-2.451-4.319-4.485-.333-.584-.583-1.036-.667-1.071l-9.52 5.83c1.583 3.249 3.915 6.069 6.902 7.901 4.462 2.678 10.459 3.499 16.731 2.059 4.082-1.189 7.604-3.652 9.448-7.401 2.666-4.915 2.094-10.864 2.07-17.444.06-10.735.001-21.468.001-32.237z"></path></svg>
+                        <span class="text-gray-300">JavaScript</span>
+                    </div>
+                    <!-- Python -->
+                    <div class="inline-flex items-center gap-2 bg-gray-700 text-sm font-medium px-4 py-2 rounded-full icon-lift">
+                        <svg class="h-6 w-6" viewBox="0 0 128 128"><linearGradient id="python-original-a" gradientUnits="userSpaceOnUse" x1="70.252" y1="1237.476" x2="170.659" y2="1151.089" gradientTransform="matrix(.563 0 0 -.568 -29.215 707.817)"><stop offset="0" stop-color="#5A9FD4"></stop><stop offset="1" stop-color="#306998"></stop></linearGradient><linearGradient id="python-original-b" gradientUnits="userSpaceOnUse" x1="209.474" y1="1098.811" x2="173.62" y2="1149.537" gradientTransform="matrix(.563 0 0 -.568 -29.215 707.817)"><stop offset="0" stop-color="#FFD43B"></stop><stop offset="1" stop-color="#FFE873"></stop></linearGradient><path fill="url(#python-original-a)" d="M63.391 1.988c-4.222.02-8.252.379-11.8 1.007-10.45 1.846-12.346 5.71-12.346 12.837v9.411h24.693v3.137H29.977c-7.176 0-13.46 4.313-15.426 12.521-2.268 9.405-2.368 15.275 0 25.096 1.755 7.311 5.947 12.519 13.124 12.519h8.491V67.234c0-8.151 7.051-15.34 15.426-15.34h24.665c6.866 0 12.346-5.654 12.346-12.548V15.833c0-6.693-5.646-11.72-12.346-12.837-4.244-.706-8.645-1.027-12.866-1.008zM50.037 9.557c2.55 0 4.634 2.117 4.634 4.721 0 2.593-2.083 4.69-4.634 4.69-2.56 0-4.633-2.097-4.633-4.69-.001-2.604 2.073-4.721 4.633-4.721z" transform="translate(0 10.26)"></path><path fill="url(#python-original-b)" d="M91.682 28.38v10.966c0 8.5-7.208 15.655-15.426 15.655H51.591c-6.756 0-12.346 5.783-12.346 12.549v23.515c0 6.691 5.818 10.628 12.346 12.547 7.816 2.297 15.312 2.713 24.665 0 6.216-1.801 12.346-5.423 12.346-12.547v-9.412H63.938v-3.138h37.012c7.176 0 9.852-5.005 12.348-12.519 2.578-7.735 2.467-15.174 0-25.096-1.774-7.145-5.161-12.521-12.348-12.521h-9.268zM77.809 87.927c2.561 0 4.634 2.097 4.634 4.692 0 2.602-2.074 4.719-4.634 4.719-2.55 0-4.633-2.117-4.633-4.719 0-2.595 2.083-4.692 4.633-4.692z" transform="translate(0 10.26)"></path><radialGradient id="python-original-c" cx="1825.678" cy="444.45" r="26.743" gradientTransform="matrix(0 -.24 -1.055 0 532.979 557.576)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#B8B8B8" stop-opacity=".498"></stop><stop offset="1" stop-color="#7F7F7F" stop-opacity="0"></stop></radialGradient><path opacity=".444" fill="url(#python-original-c)" d="M97.309 119.597c0 3.543-14.816 6.416-33.091 6.416-18.276 0-33.092-2.873-33.092-6.416 0-3.544 14.815-6.417 33.092-6.417 18.275 0 33.091 2.872 33.091 6.417z"></path></svg>
+                        <span class="text-gray-300">Python</span>
+                    </div>
+                    <!-- GitHub -->
+                    <div class="inline-flex items-center gap-2 bg-gray-700 text-sm font-medium px-4 py-2 rounded-full icon-lift">
+                        <svg class="h-6 w-6" viewBox="0 0 128 128"><g fill="#181616"><path fill-rule="evenodd" clip-rule="evenodd" d="M64 5.103c-33.347 0-60.388 27.035-60.388 60.388 0 26.682 17.303 49.317 41.297 57.303 3.017.56 4.125-1.31 4.125-2.905 0-1.44-.056-6.197-.082-11.243-16.8 3.653-20.345-7.125-20.345-7.125-2.747-6.98-6.705-8.836-6.705-8.836-5.48-3.748.413-3.67.413-3.67 6.063.425 9.257 6.223 9.257 6.223 5.386 9.23 14.127 6.562 17.573 5.02.542-3.903 2.107-6.568 3.834-8.076-13.413-1.525-27.514-6.704-27.514-29.843 0-6.593 2.36-11.98 6.223-16.21-.628-1.52-2.695-7.662.584-15.98 0 0 5.07-1.623 16.61 6.19C53.7 35 58.867 34.327 64 34.304c5.13.023 10.3.694 15.127 2.033 11.526-7.813 16.59-6.19 16.59-6.19 3.287 8.317 1.22 14.46.593 15.98 3.872 4.23 6.215 9.617 6.215 16.21 0 23.194-14.127 28.3-27.574 29.796 2.167 1.874 4.097 5.55 4.097 11.183 0 8.08-.07 14.583-.07 16.572 0 1.607 1.088 3.49 4.148 2.897 23.98-7.994 41.263-30.622 41.263-57.294C124.388 32.14 97.35 5.104 64 5.104z"></path><path d="M26.484 91.806c-.133.3-.605.39-1.035.185-.44-.196-.685-.605-.543-.906.13-.31.603-.395 1.04-.188.44.197.69.61.537.91zm2.446 2.729c-.287.267-.85.143-1.232-.28-.396-.42-.47-.983-.177-1.254.298-.266.844-.14 1.24.28.394.426.472.984.17 1.255zM31.312 98.012c-.37.258-.976.017-1.35-.52-.37-.538-.37-1.183.01-1.44.373-.258.97-.025 1.35.507.368.545.368 1.19-.01 1.452zm3.261 3.361c-.33.365-1.036.267-1.552-.23-.527-.487-.674-1.18-.343-1.544.336-.366 1.045-.264 1.564.23.527.486.686 1.18.333 1.543zm4.5 1.951c-.147.473-.825.688-1.51.486-.683-.207-1.13-.76-.99-1.238.14-.477.823-.7 1.512-.485.683.206 1.13.756.988 1.237zm4.943.361c.017.498-.563.91-1.28.92-.723.017-1.308-.387-1.315-.877 0-.503.568-.91 1.29-.924.717-.013 1.306.387 1.306.88zm4.598-.782c.086.485-.413.984-1.126 1.117-.7.13-1.35-.172-1.44-.653-.086-.498.422-.997 1.122-1.126.714-.123 1.354.17 1.444.663zm0 0"></path></g></svg>
+                        <span class="text-gray-300">GitHub</span>
+                    </div>
+                    <!-- Git -->
+                    <div class="inline-flex items-center gap-2 bg-gray-700 text-sm font-medium px-4 py-2 rounded-full icon-lift">
+                        <svg class="h-6 w-6" viewBox="0 0 128 128"><path fill="#F34F29" d="M124.737 58.378L69.621 3.264c-3.172-3.174-8.32-3.174-11.497 0L46.68 14.71l14.518 14.518c3.375-1.139 7.243-.375 9.932 2.314 2.703 2.706 3.461 6.607 2.294 9.993l13.992 13.993c3.385-1.167 7.292-.413 9.994 2.295 3.78 3.777 3.78 9.9 0 13.679a9.673 9.673 0 01-13.683 0 9.677 9.677 0 01-2.105-10.521L68.574 47.933l-.002 34.341a9.708 9.708 0 012.559 1.828c3.778 3.777 3.778 9.898 0 13.683-3.779 3.777-9.904 3.777-13.679 0-3.778-3.784-3.778-9.905 0-13.683a9.65 9.65 0 013.167-2.11V47.333a9.581 9.581 0 01-3.167-2.111c-2.862-2.86-3.551-7.06-2.083-10.576L41.056 20.333 3.264 58.123a8.133 8.133 0 000 11.5l55.117 55.114c3.174 3.174 8.32 3.174 11.499 0l54.858-54.858a8.135 8.135 0 00-.001-11.501z"></path></svg>
+                        <span class="text-gray-300">Git</span>
+                    </div>
+                    <!-- Java -->
+                    <div class="inline-flex items-center gap-2 bg-gray-700 text-sm font-medium px-4 py-2 rounded-full icon-lift">
+                        <svg class="h-6 w-6" viewBox="0 0 128 128"><path fill="#0074BD" d="M52.581 67.817s-3.284 1.911 2.341 2.557c6.814.778 10.297.666 17.805-.753 0 0 1.979 1.237 4.735 2.309-16.836 7.213-38.104-.418-24.881-4.113zm-2.059-9.415s-3.684 2.729 1.945 3.311c7.28.751 13.027.813 22.979-1.103 0 0 1.373 1.396 3.536 2.157-20.352 5.954-43.021.469-28.46-4.365z"></path><path fill="#EA2D2E" d="M67.865 42.431c4.151 4.778-1.088 9.074-1.088 9.074s10.533-5.437 5.696-12.248c-4.519-6.349-7.982-9.502 10.771-20.378.001 0-29.438 7.35-15.379 23.552z"></path><path fill="#0074BD" d="M90.132 74.781s2.432 2.005-2.678 3.555c-9.716 2.943-40.444 3.831-48.979.117-3.066-1.335 2.687-3.187 4.496-3.576 1.887-.409 2.965-.334 2.965-.334-3.412-2.403-22.055 4.719-9.469 6.762 34.324 5.563 62.567-2.506 53.665-6.524zm-35.97-26.134s-15.629 3.713-5.534 5.063c4.264.57 12.758.439 20.676-.225 6.469-.543 12.961-1.704 12.961-1.704s-2.279.978-3.93 2.104c-15.874 4.175-46.533 2.23-37.706-2.038 7.463-3.611 13.533-3.2 13.533-3.2zM82.2 64.317c16.135-8.382 8.674-16.438 3.467-15.353-1.273.266-1.845.496-1.845.496s.475-.744 1.378-1.063c10.302-3.62 18.223 10.681-3.322 16.345 0 0 .247-.224.322-.425z"></path><path fill="#EA2D2E" d="M72.474 1.313s8.935 8.939-8.476 22.682c-13.962 11.027-3.184 17.313-.006 24.498-8.15-7.354-14.128-13.828-10.118-19.852 5.889-8.842 22.204-13.131 18.6-27.328z"></path><path fill="#0074BD" d="M55.749 87.039c15.484.99 39.269-.551 39.832-7.878 0 0-1.082 2.777-12.799 4.981-13.218 2.488-29.523 2.199-39.191.603 0 0 1.98 1.64 12.158 2.294z"></path><path fill="#EA2D2E" d="M94.866 100.181h-.472v-.264h1.27v.264h-.47v1.317h-.329l.001-1.317zm2.535.066h-.006l-.468 1.251h-.216l-.465-1.251h-.005v1.251h-.312v-1.581h.457l.431 1.119.432-1.119h.454v1.581h-.302v-1.251zm-44.19 14.79c-1.46 1.266-3.004 1.978-4.391 1.978-1.974 0-3.045-1.186-3.045-3.085 0-2.055 1.146-3.56 5.738-3.56h1.697v4.667h.001zm4.031 4.548v-14.077c0-3.599-2.053-5.973-6.997-5.973-2.886 0-5.416.714-7.473 1.622l.592 2.493c1.62-.595 3.715-1.147 5.771-1.147 2.85 0 4.075 1.147 4.075 3.521v1.779h-1.424c-6.921 0-10.044 2.685-10.044 6.723 0 3.479 2.058 5.456 5.933 5.456 2.49 0 4.351-1.028 6.088-2.533l.316 2.137h3.163v-.001zm13.452 0h-5.027l-6.051-19.689h4.391l3.756 12.099.835 3.635c1.896-5.258 3.24-10.596 3.912-15.733h4.271c-1.143 6.481-3.203 13.598-6.087 19.688zm19.288-4.548c-1.465 1.266-3.01 1.978-4.392 1.978-1.976 0-3.046-1.186-3.046-3.085 0-2.055 1.149-3.56 5.736-3.56h1.701v4.667h.001zm4.033 4.548v-14.077c0-3.599-2.059-5.973-6.999-5.973-2.889 0-5.418.714-7.475 1.622l.593 2.493c1.62-.595 3.718-1.147 5.774-1.147 2.846 0 4.074 1.147 4.074 3.521v1.779h-1.424c-6.923 0-10.045 2.685-10.045 6.723 0 3.479 2.056 5.456 5.93 5.456 2.491 0 4.349-1.028 6.091-2.533l.318 2.137h3.163v-.001zm-56.693 3.346c-1.147 1.679-3.005 3.008-5.037 3.757l-1.989-2.345c1.547-.794 2.872-2.075 3.489-3.269.532-1.063.753-2.43.753-5.701V92.891h4.284v22.173c0 4.375-.348 6.144-1.5 7.867z"></path></svg>
+                        <span class="text-gray-300">Java</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SEÇÃO DE PROJETOS ATUALIZADA ===== -->
+        <section id="projetos" class="py-20 md:py-32">
+            <div class="max-w-4xl mx-auto text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 font-display">Meus Projetos</h2>
+                <p class="text-gray-400">Aqui estão alguns dos projetos em que trabalhei.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Projeto 1 -->
+                <a href="https://github.com/WendelAgra/Flappy-Bird-em-Java.git" target="_blank" class="block group relative rounded-lg overflow-hidden card-glow" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://placehold.co/600x400/111827/0ea5e9?text=Flappy+Bird" alt="Imagem do Projeto Flappy Bird" class="w-full h-80 object-cover transform group-hover:scale-110 transition-transform duration-500 ease-in-out">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent"></div>
+                    <div class="absolute inset-0 p-6 flex flex-col justify-end text-white">
+                        <h3 class="text-2xl font-bold mb-2">Flappy Bird em Java</h3>
+                        <p class="text-sm text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out h-0 group-hover:h-auto">Recriação do clássico jogo com Java e Swing, focando em POO, game loops e detecção de colisões.</p>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="bg-yellow-500/20 text-yellow-300 text-xs font-medium px-2.5 py-1 rounded-full">Java</span>
+                            <span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-1 rounded-full">Swing</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Projeto 2 -->
+                <a href="https://github.com/WendelAgra/Landing-Pages-Fanta.git" target="_blank" class="block group relative rounded-lg overflow-hidden card-glow" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://placehold.co/600x400/f97316/ffffff?text=Fanta+Site" alt="Imagem do projeto do site da Fanta" class="w-full h-80 object-cover transform group-hover:scale-110 transition-transform duration-500 ease-in-out">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent"></div>
+                    <div class="absolute inset-0 p-6 flex flex-col justify-end text-white">
+                        <h3 class="text-2xl font-bold mb-2">Website Promocional Fanta</h3>
+                        <p class="text-sm text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out h-0 group-hover:h-auto">Site responsivo com animações interativas usando HTML5, CSS3 e a biblioteca JavaScript GSAP.</p>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="bg-orange-500/20 text-orange-300 text-xs font-medium px-2.5 py-1 rounded-full">HTML5</span>
+                            <span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-1 rounded-full">CSS3</span>
+                             <span class="bg-green-500/20 text-green-300 text-xs font-medium px-2.5 py-1 rounded-full">GSAP</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Projeto 3 -->
+                <a href="https://github.com/WendelAgra/Calculadora.git" target="_blank" class="block group relative rounded-lg overflow-hidden card-glow" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://placehold.co/600x400/3776ab/ffffff?text=Calculadora" alt="Imagem do projeto da Calculadora" class="w-full h-80 object-cover transform group-hover:scale-110 transition-transform duration-500 ease-in-out">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent"></div>
+                    <div class="absolute inset-0 p-6 flex flex-col justify-end text-white">
+                        <h3 class="text-2xl font-bold mb-2">Calculadora Desktop</h3>
+                        <p class="text-sm text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out h-0 group-hover:h-auto">Aplicação de calculadora construída com Python e a biblioteca Tkinter, utilizando POO.</p>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="bg-blue-500/20 text-blue-300 text-xs font-medium px-2.5 py-1 rounded-full">Python</span>
+                            <span class="bg-gray-500/20 text-gray-300 text-xs font-medium px-2.5 py-1 rounded-full">Tkinter</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- ===== Seção Contato com Formulário ===== -->
+        <section id="contato" class="py-20 md:py-32">
+            <div class="max-w-2xl mx-auto text-center" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 font-display">Entre em Contato</h2>
+                <p class="text-gray-400 mb-8">
+                    Tem alguma pergunta ou proposta? Gostaria de trabalhar junto? <br>
+                    Sinta-se à vontade para me enviar uma mensagem.
+                </p>
+                <form action="https://formspree.io/f/meokprvg" method="POST" class="text-left">
+                    <div class="mb-4">
+                        <label for="name" class="block text-gray-400 mb-2">Nome</label>
+                        <input type="text" name="name" id="name" required class="w-full px-4 py-2 bg-custom-dark-2 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-custom-accent">
+                    </div>
+                    <div class="mb-4">
+                        <label for="email" class="block text-gray-400 mb-2">Email</label>
+                        <input type="email" name="email" id="email" required class="w-full px-4 py-2 bg-custom-dark-2 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-custom-accent">
+                    </div>
+                     <div class="mb-6">
+                        <label for="message" class="block text-gray-400 mb-2">Mensagem</label>
+                        <textarea name="message" id="message" rows="4" required class="w-full px-4 py-2 bg-custom-dark-2 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-custom-accent"></textarea>
+                    </div>
+                    <div class="text-center">
+                         <button type="submit" class="bg-sky-600 hover:bg-sky-500 text-white font-bold py-3 px-8 rounded-lg transition-transform duration-300 hover:scale-105">
+                            Enviar Mensagem
+                        </button>
+                    </div>
+                </form>
+
+                <div class="flex justify-center gap-6 mt-16">
+                    <a href="https://github.com/WendelAgra" target="_blank" class="text-gray-400 hover:text-white icon-lift" aria-label="GitHub">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                    </a>
+                     <a href="https://www.linkedin.com/in/wendel-vinicius-975528232/" target="_blank" class="text-gray-400 hover:text-white icon-lift" aria-label="LinkedIn">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== Rodapé ===== -->
+    <footer class="bg-custom-dark-2 border-t border-gray-800">
+        <div class="container mx-auto px-6 py-6 text-center text-gray-500">
+            <p>&copy; 2025 Wendel Vinicius. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Inicializa a Animate On Scroll
+        AOS.init({
+            duration: 750,
+            once: true,
+        });
+
+        // Lógica do Rastro do Cursor
+        const trailContainer = document.createElement('div');
+        document.body.appendChild(trailContainer);
+        const trails = [];
+        const numTrails = 20;
+
+        for (let i = 0; i < numTrails; i++) {
+            const t = document.createElement('div');
+            t.className = 'trail';
+            trailContainer.appendChild(t);
+            trails.push(t);
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            trails.forEach((t, index) => {
+                setTimeout(() => {
+                    t.style.left = e.clientX + 'px';
+                    t.style.top = e.clientY + 'px';
+                    t.style.opacity = (numTrails - index) / numTrails * 0.7;
+                    const scale = (numTrails - index) / numTrails;
+                    t.style.transform = `translate(-50%, -50%) scale(${scale})`;
+                }, index * 15);
+            });
+        });
+
+        // Configuração do Fundo de Partículas
+        particlesJS('particles-js', {
+          "particles": {
+            "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
+            "color": { "value": "#38bdf8" },
+            "shape": { "type": "circle" },
+            "opacity": { "value": 0.4, "random": true, "anim": {"enable": true, "speed": 0.5, "opacity_min": 0.1, "sync": false} },
+            "size": { "value": 2.5, "random": true, "anim": {"enable": false} },
+            "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.1, "width": 1 },
+            "move": { "enable": true, "speed": 1, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false }
+          },
+          "interactivity": {
+            "detect_on": "canvas",
+            "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": false }, "resize": true },
+            "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.3 } } }
+          },
+          "retina_detect": true
+        });
+    </script>
+</body>
+</html>
