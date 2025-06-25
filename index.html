@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wendel Vinicius - Portfólio</title>
+    <title>Wendel Vinicius - Portfólio Premium</title>
     
     <!-- Meta Description para SEO -->
     <meta name="description" content="Portfólio de Wendel Vinicius, analista de teste/QA e desenvolvedor front-end. Veja meus projetos, habilidades e entre em contato.">
@@ -29,9 +29,8 @@
         /* ===== ESTILOS GERAIS E FONTES ===== */
         body { 
             font-family: 'Inter', sans-serif;
-            background-color: #0c111d; /* Tom de azul-escuro mais profundo */
-            color: #e5e7eb; /* cinza claro para melhor leitura */
-            cursor: none; /* Esconde o cursor padrão */
+            background-color: #0c111d;
+            color: #e5e7eb;
         }
         .font-display { font-family: 'Exo 2', sans-serif; }
         .bg-custom-dark { background-color: #0c111d; }
@@ -40,43 +39,38 @@
         .border-custom-accent { border-color: #38bdf8; }
         .ring-custom-accent { --tw-ring-color: #38bdf8; }
 
-        /* ===== ESTILO DO RASTRO DO CURSOR ===== */
-        .trail {
-            position: fixed;
-            height: 10px;
-            width: 10px;
-            border-radius: 50%;
-            background: #38bdf8;
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            transition: opacity 0.3s, transform 0.2s;
-            z-index: 9999;
-            box-shadow: 0 0 15px 2px #38bdf8;
+        /* ===== ESTILO DO RASTRO DO CURSOR (APENAS DESKTOP) ===== */
+        @media (hover: hover) and (pointer: fine) {
+            body {
+                cursor: none;
+            }
+            .trail {
+                position: fixed;
+                height: 10px;
+                width: 10px;
+                border-radius: 50%;
+                background: #38bdf8;
+                pointer-events: none;
+                transform: translate(-50%, -50%);
+                transition: opacity 0.3s, transform 0.2s;
+                z-index: 9999;
+                box-shadow: 0 0 15px 2px #38bdf8;
+            }
         }
 
         /* ===== ESTILO DA BARRA DE ROLAGEM ===== */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background-color: #1f2937;
-        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background-color: #1f2937; }
         ::-webkit-scrollbar-thumb {
             background-color: #38bdf8;
             border-radius: 10px;
             border: 2px solid #1f2937;
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background-color: #7dd3fc;
-        }
+        ::-webkit-scrollbar-thumb:hover { background-color: #7dd3fc; }
         
         /* ===== MICRO-INTERAÇÕES ===== */
-        .icon-lift {
-            transition: transform 0.3s ease;
-        }
-        .icon-lift:hover {
-            transform: translateY(-4px);
-        }
+        .icon-lift { transition: transform 0.3s ease; }
+        .icon-lift:hover { transform: translateY(-4px); }
 
         /* ===== FUNDO ANIMADO (PARTÍCULAS) ===== */
         #particles-js {
@@ -102,8 +96,8 @@
 </head>
 <body class="bg-custom-dark">
 
-    <!-- Elementos para o rastro do cursor -->
-    <div class="trail"></div>
+    <!-- Elementos para o rastro do cursor (só será criado via JS se não for mobile) -->
+    <div id="trail-container"></div>
 
     <!-- ===== Cabeçalho / Navbar ===== -->
     <header x-data="{ mobileMenuOpen: false }" class="bg-custom-dark/80 backdrop-blur-sm sticky top-0 z-40">
@@ -116,10 +110,7 @@
             </div>
             <div class="md:hidden">
                 <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-white focus:outline-none">
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path :class="{'hidden': mobileMenuOpen, 'block': !mobileMenuOpen }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-                        <path :class="{'block': mobileMenuOpen, 'hidden': !mobileMenuOpen }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path :class="{'hidden': mobileMenuOpen, 'block': !mobileMenuOpen }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /><path :class="{'block': mobileMenuOpen, 'hidden': !mobileMenuOpen }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                 </button>
             </div>
         </nav>
@@ -134,17 +125,15 @@
 
         <!-- ===== Seção Home / Herói ===== -->
         <section id="home" class="min-h-screen flex items-center justify-center text-center relative overflow-hidden">
-            <!-- Fundo de Partículas -->
             <div id="particles-js"></div>
-            
             <div class="max-w-4xl z-10">
-                <h1 class="text-6xl md:text-8xl font-black text-white leading-tight mb-4 font-display" data-aos="fade-up">
+                <h1 class="text-5xl sm:text-6xl md:text-8xl font-black text-white leading-tight mb-4 font-display" data-aos="fade-up">
                     Olá, eu sou <span class="text-custom-accent">Wendel Vinicius</span>.
                 </h1>
-                <p class="text-xl md:text-2xl text-gray-300 mb-8" data-aos="fade-up" data-aos-delay="200">
+                <p class="text-lg sm:text-xl md:text-2xl text-gray-300 mb-8" data-aos="fade-up" data-aos-delay="200">
                     Eu sou um analista de teste/QA e desenvolvedor front-end apaixonado por criar experiências digitais incríveis.
                 </p>
-                <div class="flex justify-center gap-4" data-aos="fade-up" data-aos-delay="400">
+                <div class="flex flex-col sm:flex-row justify-center gap-4" data-aos="fade-up" data-aos-delay="400">
                     <a href="#projetos" class="bg-sky-600 hover:bg-sky-500 text-white font-bold py-3 px-8 rounded-lg transition-transform duration-300 hover:scale-105">
                         Meus Projetos
                     </a>
@@ -156,9 +145,9 @@
         </section>
 
         <!-- ===== Seção Sobre Mim ===== -->
-        <section id="sobre" class="py-20 md:py-32">
-            <div class="max-w-4xl mx-auto text-center mb-16" data-aos="fade-up">
-                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 font-display">Sobre Mim</h2>
+        <section id="sobre" class="py-16 md:py-32">
+            <div class="max-w-4xl mx-auto text-center mb-12 md:mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-4 font-display">Sobre Mim</h2>
                 <p class="text-gray-400">Minha jornada e as tecnologias com as quais trabalho.</p>
             </div>
             <div class="max-w-3xl mx-auto text-left" data-aos="fade-up">
@@ -207,9 +196,9 @@
         </section>
 
         <!-- ===== SEÇÃO DE PROJETOS ATUALIZADA ===== -->
-        <section id="projetos" class="py-20 md:py-32">
-            <div class="max-w-4xl mx-auto text-center mb-16" data-aos="fade-up">
-                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 font-display">Meus Projetos</h2>
+        <section id="projetos" class="py-16 md:py-32">
+            <div class="max-w-4xl mx-auto text-center mb-12 md:mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-4 font-display">Meus Projetos</h2>
                 <p class="text-gray-400">Aqui estão alguns dos projetos em que trabalhei.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -259,9 +248,9 @@
         </section>
 
         <!-- ===== Seção Contato com Formulário ===== -->
-        <section id="contato" class="py-20 md:py-32">
+        <section id="contato" class="py-16 md:py-32">
             <div class="max-w-2xl mx-auto text-center" data-aos="fade-up">
-                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 font-display">Entre em Contato</h2>
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-4 font-display">Entre em Contato</h2>
                 <p class="text-gray-400 mb-8">
                     Tem alguma pergunta ou proposta? Gostaria de trabalhar junto? <br>
                     Sinta-se à vontade para me enviar uma mensagem.
@@ -315,49 +304,52 @@
             once: true,
         });
 
-        // Lógica do Rastro do Cursor
-        const trailContainer = document.createElement('div');
-        document.body.appendChild(trailContainer);
-        const trails = [];
-        const numTrails = 20;
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-        for (let i = 0; i < numTrails; i++) {
-            const t = document.createElement('div');
-            t.className = 'trail';
-            trailContainer.appendChild(t);
-            trails.push(t);
-        }
+        if (!isMobile) {
+            // Lógica do Rastro do Cursor
+            const trailContainer = document.getElementById('trail-container');
+            const trails = [];
+            const numTrails = 20;
 
-        document.addEventListener('mousemove', (e) => {
-            trails.forEach((t, index) => {
-                setTimeout(() => {
-                    t.style.left = e.clientX + 'px';
-                    t.style.top = e.clientY + 'px';
-                    t.style.opacity = (numTrails - index) / numTrails * 0.7;
-                    const scale = (numTrails - index) / numTrails;
-                    t.style.transform = `translate(-50%, -50%) scale(${scale})`;
-                }, index * 15);
+            for (let i = 0; i < numTrails; i++) {
+                const t = document.createElement('div');
+                t.className = 'trail';
+                trailContainer.appendChild(t);
+                trails.push(t);
+            }
+
+            document.addEventListener('mousemove', (e) => {
+                trails.forEach((t, index) => {
+                    setTimeout(() => {
+                        t.style.left = e.clientX + 'px';
+                        t.style.top = e.clientY + 'px';
+                        t.style.opacity = (numTrails - index) / numTrails * 0.7;
+                        const scale = (numTrails - index) / numTrails;
+                        t.style.transform = `translate(-50%, -50%) scale(${scale})`;
+                    }, index * 15);
+                });
             });
-        });
 
-        // Configuração do Fundo de Partículas
-        particlesJS('particles-js', {
-          "particles": {
-            "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
-            "color": { "value": "#38bdf8" },
-            "shape": { "type": "circle" },
-            "opacity": { "value": 0.4, "random": true, "anim": {"enable": true, "speed": 0.5, "opacity_min": 0.1, "sync": false} },
-            "size": { "value": 2.5, "random": true, "anim": {"enable": false} },
-            "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.1, "width": 1 },
-            "move": { "enable": true, "speed": 1, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false }
-          },
-          "interactivity": {
-            "detect_on": "canvas",
-            "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": false }, "resize": true },
-            "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.3 } } }
-          },
-          "retina_detect": true
-        });
+            // Configuração do Fundo de Partículas
+            particlesJS('particles-js', {
+              "particles": {
+                "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#38bdf8" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.4, "random": true, "anim": {"enable": true, "speed": 0.5, "opacity_min": 0.1, "sync": false} },
+                "size": { "value": 2.5, "random": true, "anim": {"enable": false} },
+                "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.1, "width": 1 },
+                "move": { "enable": true, "speed": 1, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false }
+              },
+              "interactivity": {
+                "detect_on": "canvas",
+                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": false }, "resize": true },
+                "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.3 } } }
+              },
+              "retina_detect": true
+            });
+        }
     </script>
 </body>
 </html>
